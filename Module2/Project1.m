@@ -20,12 +20,14 @@ end % finished loop until nMax
 
 % random number array generator
 
-xStart = low_limit + (high_limit-low_limit).*rand(1,100);
-yStart = low_limit + (high_limit-low_limit).*rand(1,100);
+NStartingPoints = 1e5;
+
+xStart = low_limit + (high_limit-low_limit).*rand(1,NStartingPoints);
+yStart = low_limit + (high_limit-low_limit).*rand(1,NStartingPoints);
 
 % test random number pairs
 
-outside_box_array = zeros(1,100);
+outside_box_array = zeros(1,NStartingPoints);
 
 for j=1:length(xStart)
     
@@ -52,6 +54,10 @@ for j=1:length(xStart)
         outside_box_flag = 1;
     elseif y_rand(nMax) > high_limit
         outside_box_flag = 1;
+    elseif isnan(x_rand(nMax))
+        outside_box_flag = 1;
+    elseif isnan(y_rand(nMax))
+        outside_box_flag = 1;
     end
     
     outside_box_array(j) = outside_box_flag;
@@ -64,24 +70,24 @@ end % finished loop for every pair (xStart,yStart)
 % ------------------------------------------
 % THE BEHAVIOR / THE OUTPUT ? 
 
-figure(1); 
-plot(x,'-ok');
-ylabel('x-array values')
-xlabel('Points')
-
-figure(2)
-plot(x,y,'db')
-
-figure(3)
-plot(xStart,yStart,'*')
+% figure(1); 
+% plot(x,'-ok');
+% ylabel('x-array values')
+% xlabel('Points')
+% 
+% figure(2)
+% plot(x,y,'db')
+% 
+% figure(3)
+% plot(xStart,yStart,'*')
 
 figure(4)
 for j=1:length(outside_box_array)
     
     if outside_box_array(j) == 0
-        plot(xStart(j),yStart(j),'ob')
+        plot(xStart(j),yStart(j),'ob','MarkerSize',2)
     else
-        plot(xStart(j),yStart(j),'or')
+        plot(xStart(j),yStart(j),'or','MarkerSize',2)
     end
     
     hold on
