@@ -81,17 +81,29 @@ end % finished loop for every pair (xStart,yStart)
 % figure(3)
 % plot(xStart,yStart,'*')
 
-figure(4)
+% figure(4)
+% for j=1:length(outside_box_array)
+%     
+%     if outside_box_array(j) == 0
+%         plot(xStart(j),yStart(j),'ob','MarkerSize',2)
+%     else
+%         plot(xStart(j),yStart(j),'or','MarkerSize',2)
+%     end
+%     
+%     hold on
+%     
+% end
+
+figure(5)
 for j=1:length(outside_box_array)
     
     if outside_box_array(j) == 0
-        plot(xStart(j),yStart(j),'ob','MarkerSize',2)
+        scatter(xStart(j),yStart(j),1,j)
     else
-        plot(xStart(j),yStart(j),'or','MarkerSize',2)
+        scatter(xStart(j),yStart(j),1,[0 0 1])
     end
     
     hold on
     
 end
-
 
